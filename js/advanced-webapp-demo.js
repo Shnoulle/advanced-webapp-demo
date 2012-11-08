@@ -206,7 +206,7 @@ function notify(title, message)
     if (!message)
     {
         message = title;
-        title = "Medical Demo";
+        title = "Advanced Web App";
     }
 
     if (Unity)
