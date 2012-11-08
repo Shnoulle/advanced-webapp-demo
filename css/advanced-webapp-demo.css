@@ -40,12 +40,6 @@ body
     }
 }
 
-.navbar .brand
-{
-    width: 160px;
-    overflow: hidden;
-}
-
 .brand > img
 {
     vertical-align: top;
@@ -96,7 +90,21 @@ body
     padding: 3px 20px 7px;
     color: white;
     text-shadow: 0 1px 0 black;
+    width: 220px;
+    overflow: hidden;
+    padding-right: 0;
+    margin-right: 0;
 }
+
+@media (max-width: 480px)
+{
+    .navbar .brand
+    {
+        padding-left: 8px;
+
+    }
+}
+
 
 .navbar .navbar-text {
     line-height: 30px;

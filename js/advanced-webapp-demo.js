@@ -1,3 +1,6 @@
+var is_touch_device = !!('ontouchstart' in window);
+
+
 /* Check Local Storage for the animation style */
 var animationStyle = "slideLeft";
 var temp_AnimateInOpposite = false;
@@ -16,17 +19,17 @@ try {
 catch (e) {}
 
 var icon = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + "/img/icon.png";
-function unityReady() 
+function unityReady()
 {
     if ($(".main").hasClass("navigation-lock") == false)
     {
         Unity.Launcher.addAction("New Test", function(){ NavigateTo("test-setup.html"); });
         Unity.addAction("/New Test", function(){ NavigateTo("test-setup.html", true); });
-        
+
         Unity.Launcher.addAction("Settings", function(){ NavigateTo("settings.html", true); });
         Unity.addAction("/Settings", function(){ NavigateTo("settings.html", true); });
     }
-    
+
     Unity.Launcher.addAction("About", function(){ $('a[href="#about"]').click(); });
     Unity.addAction("/About", function(){ $('a[href="#about"]').click(); });
 }
@@ -208,31 +211,43 @@ function notify(title, message)
 
     if (Unity)
     {
-        Unity.Notification.showNotification(title, message, null); 
+        Unity.Notification.showNotification(title, message, null);
     } else {
         try {
             if (window.webkitNotifications.checkPermission() != 0) window.webkitNotifications.requestPermission();
             window.webkitNotifications.createNotification(icon, title, message).show();
         } catch (e) {
-            if (!jQuery) jQuery = $;
-            if (!gritterConfigured)
-            {
-                $.extend($.gritter.options, {
-		            class_name: 'gritter-dark', // for light notifications (can be added directly to $.gritter.add too)
-		            position: 'bottom-right', // possibilities: bottom-left, bottom-right, top-left, top-right
-			        fade_in_speed: 100, // how fast notifications fade in (string or int)
-			        fade_out_speed: 100, // how fast the notices fade out
-			        time: 3000 // hang on the screen for...
-		        });
-		        gritterConfigured = true;
+            try {
+                if (window.notifications.checkPermission() != 0) window.notifications.requestPermission();
+                window.notifications.createNotification(icon, title, message).show();
+            } catch (e) {
+                if ($(window).width() > 480 && $(window).height() > 480)
+                {
+                    if (!jQuery) jQuery = $;
+                    if (!gritterConfigured)
+                    {
+                        $.extend($.gritter.options, {
+                            class_name: 'gritter-dark', // for light notifications (can be added directly to $.gritter.add too)
+                            position: 'bottom-right', // possibilities: bottom-left, bottom-right, top-left, top-right
+                            fade_in_speed: 100, // how fast notifications fade in (string or int)
+                            fade_out_speed: 100, // how fast the notices fade out
+                            time: 3000 // hang on the screen for...
+                        });
+                        gritterConfigured = true;
+                    }
+                    $.gritter.add({
+                            title: title,
+                            text: message,
+                            image: icon,
+                            sticky: false,
+                            time: '10000'
+                        });
+                }
+                else
+                {
+                    alert(message);
+                }
             }
-            $.gritter.add({
-				    title: title,
-				    text: message,
-				    image: icon,
-				    sticky: false,
-				    time: '10000'
-			    });
-		}
-	}
+        }
+    }
 }

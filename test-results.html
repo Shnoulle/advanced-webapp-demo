@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Medical Demo - Test Results</title>
+        <title>Advanced Web App - Test Results</title>
         <meta charset="UTF-8">
         <noscript><meta http-equiv="refresh" content="0;url=noscript.html" /></noscript>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,9 +11,9 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
         <link rel="stylesheet" type="text/css" href="css/bootstrap-toggle.css" />
-        <link rel="stylesheet" type="text/css" href="css/medical-demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/advanced-webapp-demo.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
-        
+
         <!-- tell phones not to shrink mobile website -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0;" />
 
@@ -26,7 +26,7 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <script language="javascript" type="text/javascript" src="excanvas.min.js"></script>
         <![endif]-->
-        
+
     </head>
     <body>
 
@@ -35,7 +35,7 @@
                 <div class="container">
                     <a class="brand oppositeAnimation" href="index.html" class="transition">
                         <img src="img/icon.png" />
-                        Medical Demo
+                        Advanced Web App
                     </a>
                     <div class="pull-right">
                         <ul class="nav">
@@ -100,16 +100,16 @@
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/include.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/medical-demo.js"></script>
+        <script type="text/javascript" src="js/advanced-webapp-demo.js"></script>
         <script type="text/javascript" src="js/bootstrap-toggle.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
         <script type="text/javascript" src="js/jqplot/jqplot.canvasTextRenderer.min.js"></script>
         <script type="text/javascript" src="js/jqplot/jqplot.canvasAxisLabelRenderer.min.js"></script>
         <script language="javascript" type="text/javascript">
             var chart1 = null;
-            
+
             $(document).ready(function(){
-                chart1 = $.jqplot('chart1', [[30,70,90,100,400,600,380,240,150]], {  
+                chart1 = $.jqplot('chart1', [[30,70,90,100,400,600,380,240,150]], {
                               series:[{showMarker:false}],
                               axes:{
                                 xaxis:{
@@ -120,8 +120,8 @@
                                 }
                               }
                           });
-            }); 
-            
+            });
+
             $(window).resize(function(){
                     if (chart1) {
                         chart1.replot();

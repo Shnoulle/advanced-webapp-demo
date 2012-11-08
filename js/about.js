@@ -14,8 +14,8 @@ var aboutModalHTML =
 "               <div id='modal-fix2' class='span4' style='margin-left: 20px;'>" +
 "                   <div class='row'>" +
 "                       <div class='span4'>" +
-"                           <h2>Medical Demo</h2>" +
-"                           <p style='padding-left: 20px;'>A simple demonstration for a medical HTML5 application.</p>" +
+"                           <h2>Advanced Web App</h2>" +
+"                           <p style='padding-left: 20px;'>A simple demonstration for an HTML5 application.</p>" +
 "                           <hr />" +
 "                           <p>Author: Samuel Sarette</p>" +
 "                           <p>Email: samuelsarette@linux.com</p>" +
