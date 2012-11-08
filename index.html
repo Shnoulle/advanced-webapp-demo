@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Medical Demo</title>
+        <meta charset="UTF-8">
+        <noscript><meta http-equiv="refresh" content="0;url=noscript.html" /></noscript>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/png" href="img/icon.png">
+
+        <link rel="stylesheet" type="text/css" href="css/jquery.gritter.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/medical-demo.css" />
+        
+        <!-- tell phones not to shrink mobile website -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0;" />
+
+        <!-- Remove fading flicker -->
+        <style> .main { display:none; } </style>
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="#">
+                        <img src="img/icon.png" />
+                        Medical Demo
+                    </a>
+                    <div class="pull-right">
+                        <ul class="nav">
+                            <li class="hidden-phone"><a data-toggle="modal" href="#about"><i class="icon-info-sign icon-white"></i> About</a></li>
+                            <li class="visible-phone"><a href="aboutmobile.html" class="oppositeAnimation"><i class="icon-info-sign icon-white"></i></a></li>
+                            <li><a href="settings.html" class="transition oppositeAnimation"><i class="icon-cog icon-white"></i> <span class="hidden-phone inline-form">Settings</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container main">
+            <div class="hero-unit">
+                <h1>Welcome</h1>
+                <p>This is a simple demonstration application.</p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="test-setup.html" >
+                        Continue to Test
+                        <span class="hidden-phone inline-form">
+                            &nbsp;<i class="icon-arrow-right icon-white"></i>
+                        </span>
+                    </a>
+                </p>
+            </div>
+
+            <div id="aboutcontainer"></div>
+        </div> <!-- /container -->
+        <div id="spacer"></div>
+
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/include.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.gritter.min.js"></script>
+        <script type="text/javascript" src="js/medical-demo.js"></script>
+        <script type="text/javascript">
+            setTimeout(function(){notify("Connected to instrument.");}, 1000);
+        </script>
+    </body>
+</html>

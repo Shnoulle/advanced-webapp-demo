@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Medical Demo - Testing</title>
+        <meta charset="UTF-8">
+        <noscript><meta http-equiv="refresh" content="0;url=noscript.html" /></noscript>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/png" href="img/icon.png">
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/medical-demo.css" />
+        <!-- tell phones not to shrink mobile website -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0;" />
+
+        <!-- Remove fading flicker -->
+        <style> .main { display:none; } </style>
+        <noscript><style> .main { display:block; } </style> </noscript>
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand oppositeAnimation" href="index.html">
+                        <img src="img/icon.png" />
+                        Medical Demo
+                    </a>
+                    <div class="pull-right">
+                        <ul class="nav">
+                            <li class="hidden-phone"><a data-toggle="modal" href="#about"><i class="icon-info-sign icon-white"></i> About</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container main navigation-lock">
+            <div class="hero-unit">
+                <h1>Running Test</h1>
+                <p>
+                    <div class="progress progress-striped active">
+                        <div id="testprogress" class="bar" style="width: 10%;"></div>
+                    </div>
+                </p>
+            </div>
+
+            <div id="aboutcontainer">
+            </div>
+        </div> <!-- /container -->
+
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/include.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/medical-demo.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                history.forward(); // can't go back to the test
+
+                setTimeout("twentyComplete()", 100);
+            });
+
+            function twentyComplete()
+            {
+                $('#testprogress').css('width','20%');
+                setTimeout("thirtyComplete()", 1000);
+            }
+
+            function thirtyComplete()
+            {
+                $('#testprogress').css('width','30%');
+                setTimeout("fourtyComplete()", 1000);
+            }
+
+            function fourtyComplete()
+            {
+                $('#testprogress').css('width','40%');
+                setTimeout("fiftyComplete()", 1000);
+            }
+
+            function fiftyComplete()
+            {
+                $('#testprogress').css('width','50%');
+                setTimeout("sixtyComplete()", 1000);
+            }
+
+            function sixtyComplete()
+            {
+                $('#testprogress').css('width','60%');
+                setTimeout("seventyComplete()", 1000);
+            }
+
+            function seventyComplete()
+            {
+                $('#testprogress').css('width','70%');
+                setTimeout("eightyComplete()", 1000);
+            }
+
+            function eightyComplete()
+            {
+                $('#testprogress').css('width','80%');
+                setTimeout("ninetyComplete()", 1000);
+            }
+
+            function ninetyComplete()
+            {
+                $('#testprogress').css('width','90%');
+                setTimeout("complete()", 1000);
+            }
+
+            function complete()
+            {
+                $('#testprogress').css('width','100%');
+                setTimeout("NavigateTo('test-results.html')", 1000);
+            }
+        </script>
+    </body>
+</html>

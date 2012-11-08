@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Medical Demo - Test Results</title>
+        <meta charset="UTF-8">
+        <noscript><meta http-equiv="refresh" content="0;url=noscript.html" /></noscript>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/png" href="img/icon.png">
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-toggle.css" />
+        <link rel="stylesheet" type="text/css" href="css/medical-demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
+        
+        <!-- tell phones not to shrink mobile website -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0;" />
+
+        <!-- Remove fading flicker -->
+        <style> .main { display:none; } </style>
+        <noscript><style> .main { display:block; } </style> </noscript>
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script language="javascript" type="text/javascript" src="excanvas.min.js"></script>
+        <![endif]-->
+        
+    </head>
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand oppositeAnimation" href="index.html" class="transition">
+                        <img src="img/icon.png" />
+                        Medical Demo
+                    </a>
+                    <div class="pull-right">
+                        <ul class="nav">
+                            <li class="hidden-phone"><a data-toggle="modal" href="#about"><i class="icon-info-sign icon-white"></i> About</a></li>
+                            <li class="visible-phone"><a href="aboutmobile.html" class="oppositeAnimation"><i class="icon-info-sign icon-white"></i></a></li>
+                            <li><a href="settings.html" class="transition oppositeAnimation"><i class="icon-cog icon-white"></i> <span class="hidden-phone inline-form">Settings</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container main">
+            <div class="row-fluid">
+                <div class="span4">
+                    <div class="form-horizontal">
+                        <fieldset>
+                            <legend>Test Information</legend>
+
+                            <div class="control-group">
+                                <label class="control-label" for="patient">Patient ID</label>
+                                <div class="controls">
+                                    <p id="patient">1234</p>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="consumable">Consumable ID</label>
+                                <div class="controls">
+                                    <p id="consumable">1234</p>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="input01">Example</label>
+                                <div class="controls">
+                                    <p id="input01">1234</p>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <a class="btn btn-primary oppositeAnimation" id="go" href="test-setup.html"><i class="icon-repeat icon-white hidden-phone"></i> Another Test</a>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="span1"></div>
+                <div class="span7">
+                    <div id="chart1" style="height:400px; width:100%; margin-top: 40px;"></div>
+                </div>
+            </div>
+
+            <div id="aboutcontainer">
+            </div>
+        </div> <!-- /container -->
+
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/include.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/medical-demo.js"></script>
+        <script type="text/javascript" src="js/bootstrap-toggle.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="js/jqplot/jqplot.canvasTextRenderer.min.js"></script>
+        <script type="text/javascript" src="js/jqplot/jqplot.canvasAxisLabelRenderer.min.js"></script>
+        <script language="javascript" type="text/javascript">
+            var chart1 = null;
+            
+            $(document).ready(function(){
+                chart1 = $.jqplot('chart1', [[30,70,90,100,400,600,380,240,150]], {  
+                              series:[{showMarker:false}],
+                              axes:{
+                                xaxis:{
+                                  label:'Time (minutes)'
+                                },
+                                yaxis:{
+                                  label:'Turbidity (FTU)'
+                                }
+                              }
+                          });
+            }); 
+            
+            $(window).resize(function(){
+                    if (chart1) {
+                        chart1.replot();
+                    }
+                });
+        </script>
+    </body>
+</html>

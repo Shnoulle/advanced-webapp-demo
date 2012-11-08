@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Medical Demo - About</title>
+        <meta charset="UTF-8">
+        <noscript><meta http-equiv="refresh" content="0;url=noscript.html" /></noscript>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/png" href="img/icon.png">
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/medical-demo.css" />
+        <!-- tell phones not to shrink mobile website -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0;" />
+
+        <!-- Remove fading flicker -->
+        <style> .main { display:none; } </style>
+        <noscript><style> .main { display:block; } </style> </noscript>
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="index.html">
+                        <img src="img/icon.png" />
+                        Medical Demo
+                    </a>
+                    <div class="pull-right">
+                        <ul class="nav">
+                            <li><a href="#" class="transition back"><i class="icon-circle-arrow-left icon-white"></i> <span class="hidden-phone inline-form">Back</span></a></li>
+                            <li><a href="settings.html" class="transition"><i class="icon-cog icon-white"></i> <span class="hidden-phone inline-form">Settings</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container main"></div>
+
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/include.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/medical-demo.js"></script>
+        <script type="text/javascript" src="js/about.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+                $(".main").append(aboutModalHTML);
+                $("#about").removeClass("modal hide fade in");
+                $(".modal-footer").remove();
+                $(".modal-header").remove();
+                $("#modal-fix1").css('width', '');
+                $("#modal-fix2").css('margin', '');
+                $(".modal-body").removeClass("modal-body");
+                
+                $(".row").addClass("row-fluid");
+                $(".row-fluid").removeClass("row");
+            });
+            
+            $(window).resize(function()
+            {
+                if ($(window).width() > 480)
+                {
+                    window.history.back();
+                }
+            });
+        </script>
+    </body>
+</html>
