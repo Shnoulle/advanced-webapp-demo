@@ -6,4 +6,5 @@ IF EXIST %CHROME_LOCAL% (
     %CHROME_LOCAL% --app=http://localhost/medical-demo/index.html
 ) ELSE (
     echo Could not find Google Chrome.
+    pause
 )
