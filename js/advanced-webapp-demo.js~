@@ -39,7 +39,7 @@ function unityReady()
 $(window).bind("unload", function() { }); // need this to fix firefox back() issue
 $(document).ready(function()
 {
-    if (Unity) Unity.init({name: "Advanced WebApp Demo",
+    if (Unity) Unity.init({name: "Medical Demo",
                 iconUrl: icon,
                 onInit: unityReady});
 
