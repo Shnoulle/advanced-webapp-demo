@@ -169,6 +169,7 @@ function NavigateTo(url, oppositeAnimation)
     var delay = 500; // milliseconds
     if (oppositeAnimation)
     {
+        if (localStorage)
         localStorage.setItem('temp_AnimateInOpposite', "true" );
     }
 
