@@ -19,6 +19,8 @@ try {
 catch (e) {}
 
 var icon = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + "/img/icon.png";
+icon = icon.replace(/file:\/\/(.*)/, '$1');
+
 function unityReady()
 {
     if ($(".main").hasClass("navigation-lock") == false)
