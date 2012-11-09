@@ -13,10 +13,18 @@ if (localStorage)
 
 /* Unity integration */
 var Unity = null;
-try {
-    Unity = external.getUnityObject ? external.getUnityObject(1.0) : null;
-}
-catch (e) {}
+function setupUnity() { 
+    try {
+        Unity = external.getUnityObject(1.0); 
+    }
+    catch (e) {
+        setTimeout(setupUnity, 500);
+    }
+    
+    if (Unity) Unity.init({name: "Advanced WebApp Demo",
+                iconUrl: icon,
+                onInit: unityReady});
+} 
 
 var icon = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + "/img/icon.png";
 icon = icon.replace(/file:\/\/(.*)/, '$1');
@@ -39,10 +47,7 @@ function unityReady()
 $(window).bind("unload", function() { }); // need this to fix firefox back() issue
 $(document).ready(function()
 {
-    if (Unity) Unity.init({name: "Advanced WebApp Demo",
-                iconUrl: icon,
-                onInit: unityReady});
-
+    setupUnity();
     include("js/about.js", function()
     {
         $("#aboutcontainer").append(aboutModalHTML);
@@ -69,29 +74,33 @@ $(document).ready(function()
     });
 
     /* Animate In */
-    if (animationStyle == "slideRight" || (temp_AnimateInOpposite && animationStyle == "slideLeft" ) )
+    if ( (temp_AnimateInOpposite && animationStyle == "slideLeft" ) || (!temp_AnimateInOpposite && animationStyle == "slideRight" ) )
     {
+        $(".main").width($(".main").width());
         $(".main").css("display", "block");
         var originalMargin = $(".main").css("margin-left");
         $(".main").css("margin-left", -$(document).width() );
         $(".main").animate({ 'margin-left': originalMargin }, 500, "", function(){ $(".main").css("margin-left", ""); });
     }
-    else if (animationStyle == "slideLeft" || (temp_AnimateInOpposite && animationStyle == "slideRight") )
+    else if ( (temp_AnimateInOpposite && animationStyle == "slideRight") || (!temp_AnimateInOpposite && animationStyle == "slideLeft" ) )
     {
+        $(".main").width($(".main").width());
         $(".main").css("display", "block");
         var originalMargin = $(".main").css("margin-left");
         $(".main").css("margin-left", $(document).width());
         $(".main").animate({ 'margin-left': originalMargin }, 500, "", function(){ $(".main").css("margin-left", ""); });
     }
-    else if (animationStyle == "slideUp" || (temp_AnimateInOpposite && animationStyle == "slideDown"))
+    else if ( (temp_AnimateInOpposite && animationStyle == "slideDown") || (!temp_AnimateInOpposite && animationStyle == "slideUp"))
     {
+        $(".main").width($(".main").width());
         $(".main").css("display", "block");
         var originalMargin = $(".main").css("margin-top");
         $(".main").css("margin-top", $(document).width() );
         $(".main").animate({ 'margin-top': originalMargin }, 500, "", function(){ $(".main").css("margin-top", ""); });
     }
-    else if (animationStyle == "slideDown" || (temp_AnimateInOpposite && animationStyle == "slideUp"))
+    else if ( (temp_AnimateInOpposite && animationStyle == "slideUp") || (!temp_AnimateInOpposite && animationStyle == "slideDown"))
     {
+        $(".main").width($(".main").width());
         $(".main").css("display", "block");
         var originalMargin = $(".main").css("margin-top");
         $(".main").css("margin-top", -$(document).width() );
@@ -107,6 +116,8 @@ $(document).ready(function()
     {
         $(".main").css("display", "block");
     }
+    
+    $(".main").width("auto");
 
     $("a.transition").click(function(event){
         event.preventDefault();
@@ -172,20 +183,22 @@ function NavigateTo(url, oppositeAnimation)
         if (localStorage)
         localStorage.setItem('temp_AnimateInOpposite', "true" );
     }
+    
+    $(".main").width($(".main").width());
 
-    if (animationStyle == "slideRight" || (oppositeAnimation && animationStyle == "slideLeft") )
+    if ((!oppositeAnimation && animationStyle == "slideRight") || (oppositeAnimation && animationStyle == "slideLeft") )
     {
         $(".main").animate({ 'margin-left': $(document).width() }, delay, "", redirectPage(url, delay) );
     }
-    else if (animationStyle == "slideLeft" || (oppositeAnimation && animationStyle == "slideRight") )
+    else if ((!oppositeAnimation && animationStyle == "slideLeft") || (oppositeAnimation && animationStyle == "slideRight") )
     {
         $(".main").animate({ 'margin-left': -$(document).width() }, delay, "", redirectPage(url, delay) );
     }
-    else if (animationStyle == "slideUp" || (oppositeAnimation && animationStyle == "slideDown") )
+    else if ((!oppositeAnimation && animationStyle == "slideUp") || (oppositeAnimation && animationStyle == "slideDown") )
     {
         $(".main").animate({ 'margin-top': -$(document).height() }, delay, "", redirectPage(url, delay) );
     }
-    else if (animationStyle == "slideDown" || (oppositeAnimation && animationStyle == "slideUp") )
+    else if ((!oppositeAnimation && animationStyle == "slideDown") || (oppositeAnimation && animationStyle == "slideUp") )
     {
         $(".main").animate({ 'margin-top': $(document).height() }, delay, "", redirectPage(url, delay) );
     }
