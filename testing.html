@@ -22,6 +22,48 @@
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        <style>
+            .status-tile
+            {
+                text-align: center;
+            }
+
+            .status-tile
+            {
+                height: 128px;
+                width: 16.2%;
+                border-radius: 5px;
+                display: inline-block;
+                text-align: center;
+                padding-top: 108px;
+                font-size: 76px;
+            }
+
+            @media (max-width: 1200px) { .status-tile { width: 15.8%; } }
+            @media (max-width: 768px) { .status-tile { width: 15.4%; } }
+            @media (max-width: 480px)
+            {
+                .status-tile
+                {
+                    height: 78px;
+                    width: 15%;
+                    font-size: 26px;
+                    padding-top: 58px;
+                }
+            }
+            @media (max-width: 400px) { .status-tile { width: 14.5%; } }
+            @media (max-width: 340px) { .status-tile { width: 14%; } }
+            @media (max-width: 300px) { #status-tiles { display: none; } }
+
+            .greyscale
+            {
+                filter: grayscale(100%);
+                -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%);
+                -ms-filter: grayscale(100%); -o-filter: grayscale(100%);
+                filter: gray;
+            }
+
+        </style>
     </head>
     <body>
 
@@ -44,11 +86,21 @@
         <div class="container main navigation-lock">
             <div class="hero-unit">
                 <h1>Running Test</h1>
-                <p>
-                    <div class="progress progress-striped active">
-                        <div id="testprogress" class="bar" style="width: 10%;"></div>
-                    </div>
-                </p>
+                    <p>
+                        <div id="status-tiles" style="width: 100%; height: 240px;">
+                            <div id="1" class="status-tile" style="color: white; background: blue;" >♟</div>
+                            <div id="2" class="status-tile" style="background: green;" >♞</div>
+                            <div id="3" class="status-tile" style="background: yellow;" >♝</div>
+                            <div id="4" class="status-tile" style="color: white; background: red;" >♜</div>
+                            <div id="5" class="status-tile" style="background: green;" >♛</div>
+                            <div id="6" class="status-tile" style="color: white; background: blue;" >♚</div>
+                        </div>
+                    </p>
+                    <p>
+                        <div class="progress progress-striped active">
+                            <div id="testprogress" class="bar" style="width: 10%;"></div>
+                        </div>
+                    </p>
             </div>
 
             <div id="aboutcontainer">
@@ -65,12 +117,17 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 history.forward(); // can't go back to the test
+                $(".status-tile").addClass("greyscale");
+                $(".status-tile#1").removeClass("greyscale");
 
-                setTimeout("twentyComplete()", 100);
+                setTimeout("twentyComplete()", 2000);
             });
 
             function twentyComplete()
             {
+                $(".status-tile").addClass("greyscale");
+                $(".status-tile#2").removeClass("greyscale");
+
                 $('#testprogress').css('width','20%');
                 setTimeout("thirtyComplete()", 1000);
             }
@@ -83,12 +140,18 @@
 
             function fourtyComplete()
             {
+                $(".status-tile").addClass("greyscale");
+                $(".status-tile#3").removeClass("greyscale");
+
                 $('#testprogress').css('width','40%');
                 setTimeout("fiftyComplete()", 1000);
             }
 
             function fiftyComplete()
             {
+                $(".status-tile").addClass("greyscale");
+                $(".status-tile#4").removeClass("greyscale");
+
                 $('#testprogress').css('width','50%');
                 setTimeout("sixtyComplete()", 1000);
             }
@@ -102,17 +165,23 @@
             function seventyComplete()
             {
                 $('#testprogress').css('width','70%');
-                setTimeout("eightyComplete()", 1000);
+                setTimeout("eightyComplete()", 2000);
             }
 
             function eightyComplete()
             {
+                $(".status-tile").addClass("greyscale");
+                $(".status-tile#5").removeClass("greyscale");
+
                 $('#testprogress').css('width','80%');
                 setTimeout("ninetyComplete()", 1000);
             }
 
             function ninetyComplete()
             {
+                $(".status-tile").addClass("greyscale");
+                $(".status-tile#6").removeClass("greyscale");
+
                 $('#testprogress').css('width','90%');
                 setTimeout("complete()", 1000);
             }
@@ -120,7 +189,7 @@
             function complete()
             {
                 $('#testprogress').css('width','100%');
-                setTimeout("NavigateTo('test-results.html')", 1000);
+               // setTimeout("NavigateTo('test-results.html')", 1000);
             }
         </script>
     </body>
