@@ -31,7 +31,7 @@
                 <div class="container">
                     <a class="brand oppositeAnimation" href="index.html" class="transition">
                         <img src="img/icon.png" />
-                        Advanced Web App
+                        <span>Advanced Web App</span>
                     </a>
                     <div class="pull-right">
                         <ul class="nav">
@@ -47,35 +47,35 @@
         <div class="container main">
             <div class="row-fluid">
                 <div class="span12">
-                    <form class="form-horizontal" action="testing.html" method="post" >
+                    <form id="test-form" class="form-horizontal" action="testing.html" method="post" >
                         <fieldset>
-                            <legend>Test Information</legend>
+                            <legend>Process Information</legend>
 
                             <div class="control-group">
-                                <label class="control-label" for="consumable">Patient ID</label>
+                                <label class="control-label" for="runs">Run #</label>
                                 <div class="controls">
-                                    <input type="number" class="input-xlarge" id="consumable">
+                                    <input type="number" class="input-xlarge" name="runs">
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="consumable">Consumable ID</label>
+                                <label class="control-label" for="process_id">Process ID</label>
                                 <div class="controls">
-                                    <input type="number" class="input-xlarge" id="consumable" />
-                                    <p class="help-block">Look at the label on the consumable.</p>
+                                    <input type="number" class="input-xlarge" name="process_id" />
+                                    <p class="help-block">For accounting use only.</p>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="input01">Example</label>
+                                <label class="control-label" for="notes">Notes</label>
                                 <div class="controls">
-                                    <input type="text" class="input-xlarge" id="input01" />
+                                    <textarea class="input-xlarge" rows="5" name="notes" ></textarea>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <div class="controls">
-                                    <input type="submit" class="btn btn-primary" id="go" value="Run Test">
+                                    <button class="btn btn-primary" id="go" onclick="saveInfo();">Run <i class="icon-circle-arrow-right icon-white"></i></button>
                                 </div>
                             </div>
                         </fieldset>
@@ -96,5 +96,40 @@
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/advanced-webapp-demo.js"></script>
         <script type="text/javascript" src="js/bootstrap-toggle.js"></script>
+        <script type="text/javascript">
+            var run = 0;
+            var process = 0;
+            var notes = "";
+
+            $(document).ready(function(){
+                /* Check Local Storage */
+                if (localStorage)
+                {
+                    if ( localStorage.getItem('run') != null ) run = localStorage.getItem('run');
+                    if ( localStorage.getItem('process') != null ) process = localStorage.getItem('process');
+                    if ( localStorage.getItem('notes') != null ) notes = localStorage.getItem('notes');
+                }
+
+                run++;
+                process++;
+                notes = "";
+
+                $("input[name=runs]").val(run);
+                $("input[name=process_id]").val(process);
+                $("input[name=notes]").val(notes);
+            });
+
+            function saveInfo()
+            {
+                if (localStorage)
+                {
+                    localStorage.setItem('run', $("input[name=runs]").val() );
+                    localStorage.setItem('process', $("input[name=process_id]").val() );
+                    localStorage.setItem('notes', $("input[name=notes]").val() || " " );
+                }
+
+                $("#test-form").submit();
+            }
+        </script>
     </body>
 </html>

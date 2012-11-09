@@ -43,8 +43,8 @@ body
 .brand > img
 {
     vertical-align: top;
+    width: 20px;
     height: 20px;
-    margin-right: -4px;
 }
 
 /* Style Overrides */
@@ -91,7 +91,6 @@ body
     color: white;
     text-shadow: 0 1px 0 black;
     width: 220px;
-    overflow: hidden;
     padding-right: 0;
     margin-right: 0;
 }
@@ -101,6 +100,20 @@ body
     .navbar .brand
     {
         padding-left: 8px;
+
+    }
+}
+
+@media (max-width: 320px)
+{
+    .navbar .brand
+    {
+        width: 32px;
+
+    }
+    .navbar .brand > span
+    {
+        display: none;
 
     }
 }

@@ -27,6 +27,7 @@
             <script language="javascript" type="text/javascript" src="excanvas.min.js"></script>
         <![endif]-->
 
+        <style> .controls > p { margin-top: 5px; } </style>
     </head>
     <body>
 
@@ -35,7 +36,7 @@
                 <div class="container">
                     <a class="brand oppositeAnimation" href="index.html" class="transition">
                         <img src="img/icon.png" />
-                        Advanced Web App
+                        <span>Advanced Web App</span>
                     </a>
                     <div class="pull-right">
                         <ul class="nav">
@@ -56,23 +57,23 @@
                             <legend>Test Information</legend>
 
                             <div class="control-group">
-                                <label class="control-label" for="patient">Patient ID</label>
+                                <label class="control-label" for="runs">Run #</label>
                                 <div class="controls">
-                                    <p id="patient">1234</p>
+                                    <p id="runs"></p>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="consumable">Consumable ID</label>
+                                <label class="control-label" for="process_id">Process ID</label>
                                 <div class="controls">
-                                    <p id="consumable">1234</p>
+                                    <p id="process_id"></p>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="input01">Example</label>
+                                <label class="control-label" for="notes">Note</label>
                                 <div class="controls">
-                                    <p id="input01">1234</p>
+                                    <p id="notes"></p>
                                 </div>
                             </div>
 
@@ -106,27 +107,45 @@
         <script type="text/javascript" src="js/jqplot/jqplot.canvasTextRenderer.min.js"></script>
         <script type="text/javascript" src="js/jqplot/jqplot.canvasAxisLabelRenderer.min.js"></script>
         <script language="javascript" type="text/javascript">
+            var run = 1234123;
+            var process = 5321;
+            var notes = "This test is the important";
             var chart1 = null;
 
             $(document).ready(function(){
-                chart1 = $.jqplot('chart1', [[30,70,90,100,400,600,380,240,150]], {
+                chart1 = $.jqplot('chart1', [[3,7,9,10,40,60,38,24,15]], {
                               series:[{showMarker:false}],
                               axes:{
                                 xaxis:{
-                                  label:'Time (minutes)'
+                                  label:'Time (m)'
                                 },
                                 yaxis:{
-                                  label:'Turbidity (FTU)'
+                                  label:'Moves'
                                 }
                               }
                           });
             });
 
+            $(document).ready(function(){
+                /* Check Local Storage */
+                if (localStorage)
+                {
+                    if ( localStorage.getItem('run') != null ) run = localStorage.getItem('run');
+                    if ( localStorage.getItem('process') != null ) process = localStorage.getItem('process');
+                    if ( localStorage.getItem('notes') != null ) notes = localStorage.getItem('notes');
+                }
+
+                $("#runs").text(run);
+                $("#process_id").text(process);
+                $("#notes").text(notes == " " ? "None" : notes);
+            });
+
+
             $(window).resize(function(){
-                    if (chart1) {
-                        chart1.replot();
-                    }
-                });
+                if (chart1) {
+                    chart1.replot();
+                }
+            });
         </script>
     </body>
 </html>

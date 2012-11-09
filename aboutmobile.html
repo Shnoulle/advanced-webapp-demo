@@ -22,6 +22,18 @@
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
+        <style>
+            #about-icon
+            {
+                width: 128px;
+                margin: 5px;
+                margin-top: 30px;
+                float: left;
+            }
+            @media (max-width: 525px) { #about-icon { margin-top: 10px; width: 42px; } }
+            @media (min-width: 460px) { .man > row-fluid { padding: 4px 20px; } }
+            @media (max-width: 460px) { .man > row-fluid { padding: 4px; } }
+        </style>
     </head>
     <body>
 
@@ -30,7 +42,7 @@
                 <div class="container">
                     <a class="brand" href="index.html">
                         <img src="img/icon.png" />
-                        Advanced Web App
+                        <span>Advanced Web App</span>
                     </a>
                     <div class="pull-right">
                         <ul class="nav">
@@ -42,7 +54,9 @@
             </div>
         </div>
 
-        <div class="container main"></div>
+        <div class="container main">
+            <div class="row-fluid"></div>
+        </div>
 
         <!-- Le javascript
         ================================================== -->
@@ -56,20 +70,17 @@
             $(document).ready(function()
             {
                 $(".main").append(aboutModalHTML);
-                $("#about").removeClass("modal hide fade in");
-                $(".modal-footer").remove();
-                $(".modal-header").remove();
-                $("#modal-fix1").css('width', '');
-                $("#modal-fix2").css('margin', '');
-                $(".modal-body").removeClass("modal-body");
 
-                $(".row").addClass("row-fluid");
-                $(".row-fluid").removeClass("row");
+                $(".main > .row-fluid").append($("#about-icon"));
+                $("#about-icon").attr("style", "");
+                $(".main > .row-fluid").append($("#about > .modal-body > .row-fluid > .span7").html());
+
+                $("#about").remove();
             });
 
             $(window).resize(function()
             {
-                if ($(window).width() > 480)
+                if ($(window).width() > 768)
                 {
                     window.history.back();
                 }
