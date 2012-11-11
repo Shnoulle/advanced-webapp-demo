@@ -1,6 +1,5 @@
 var is_touch_device = !!('ontouchstart' in window);
 
-
 /* Check Local Storage for the animation style */
 var animationStyle = "slideLeft";
 var temp_AnimateInOpposite = false;
@@ -11,52 +10,20 @@ if (localStorage)
     localStorage.setItem('temp_AnimateInOpposite', "false" );
 }
 
-/* Unity integration */
-var Unity = null;
-function setupUnity() { 
-    try {
-        Unity = external.getUnityObject(1.0); 
-    }
-    catch (e) {
-        setTimeout(setupUnity, 500);
-    }
-    
-    if (Unity) Unity.init({name: "Advanced WebApp Demo",
-                iconUrl: icon,
-                onInit: unityReady});
-} 
-
-var icon = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + "/img/icon.png";
-icon = icon.replace(/file:\/\/(.*)/, '$1');
-
-function unityReady()
+/* About Modal */
+include("js/about.js", function()
 {
-    if ($(".main").hasClass("navigation-lock") == false)
-    {
-        Unity.Launcher.addAction("New Test", function(){ NavigateTo("test-setup.html"); });
-        Unity.addAction("/New Test", function(){ NavigateTo("test-setup.html", true); });
+    $("#aboutcontainer").append(aboutModalHTML);
+    $('#about').modal({
+        keyboard: true,
+        show: false
+    });
+});
 
-        Unity.Launcher.addAction("Settings", function(){ NavigateTo("settings.html", true); });
-        Unity.addAction("/Settings", function(){ NavigateTo("settings.html", true); });
-    }
-
-    Unity.Launcher.addAction("About", function(){ $('a[href="#about"]').click(); });
-    Unity.addAction("/About", function(){ $('a[href="#about"]').click(); });
-}
 
 $(window).bind("unload", function() { }); // need this to fix firefox back() issue
 $(document).ready(function()
 {
-    setupUnity();
-    include("js/about.js", function()
-    {
-        $("#aboutcontainer").append(aboutModalHTML);
-        $('#about').modal({
-            keyboard: true,
-            show: false
-        });
-    });
-
     /* disable context menu */
     $(document).bind("contextmenu",function(e){
         return false;
@@ -116,7 +83,7 @@ $(document).ready(function()
     {
         $(".main").css("display", "block");
     }
-    
+
     $(".main").width("auto");
 
     $("a.transition").click(function(event){
@@ -183,7 +150,7 @@ function NavigateTo(url, oppositeAnimation)
         if (localStorage)
         localStorage.setItem('temp_AnimateInOpposite', "true" );
     }
-    
+
     $(".main").width($(".main").width());
 
     if ((!oppositeAnimation && animationStyle == "slideRight") || (oppositeAnimation && animationStyle == "slideLeft") )
@@ -237,7 +204,7 @@ function notify(title, message)
                 if (window.notifications.checkPermission() != 0) window.notifications.requestPermission();
                 window.notifications.createNotification(icon, title, message).show();
             } catch (e) {
-                if ($(window).width() > 480 && $(window).height() > 480)
+                if ($(window).width() > 480)
                 {
                     if (!jQuery) jQuery = $;
                     if (!gritterConfigured)

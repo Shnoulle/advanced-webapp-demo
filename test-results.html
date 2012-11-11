@@ -17,6 +17,12 @@
         <!-- tell phones not to shrink mobile website -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0;" />
 
+        <!-- Windows Integration -->
+        <meta name="application-name" content="Advanced Web App Demo"/>
+        <meta name="msapplication-TileImage" content="img/icon.png">
+        <meta name="msapplication-TileColor" content="#000000">
+        <!-- <meta name="msapplication-badge" content="frequency=1440; polling-uri=http://app.com/badge.xml"> -->
+
         <!-- Remove fading flicker -->
         <style> .main { display:none; } </style>
         <noscript><style> .main { display:block; } </style> </noscript>
@@ -40,7 +46,7 @@
                     </a>
                     <div class="pull-right">
                         <ul class="nav">
-                            <li class="hidden-phone"><a data-toggle="modal" href="#about"><i class="icon-info-sign icon-white"></i> About</a></li>
+                            <li class="hidden-phone"><a id="about" data-toggle="modal" href="#about"><i class="icon-info-sign icon-white"></i> About</a></li>
                             <li class="visible-phone"><a href="aboutmobile.html" class="oppositeAnimation"><i class="icon-info-sign icon-white"></i></a></li>
                             <li><a href="settings.html" class="transition oppositeAnimation"><i class="icon-cog icon-white"></i> <span class="hidden-phone inline-form">Settings</span></a></li>
                         </ul>
@@ -89,8 +95,8 @@
                 </div>
             </div>
 
-            <div id="aboutcontainer">
-            </div>
+            <div id="aboutcontainer"></div>
+            <div id="windowspincontainer"></div>
         </div> <!-- /container -->
 
         <!-- Le javascript
@@ -101,6 +107,8 @@
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/advanced-webapp-demo.js"></script>
         <script type="text/javascript" src="js/bootstrap-toggle.js"></script>
+        <script type="text/javascript" src="js/mswindows.js"></script>
+        <script type="text/javascript" src="js/unity.js"></script>
         <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
         <script type="text/javascript" src="js/jqplot/jqplot.canvasTextRenderer.min.js"></script>
         <script type="text/javascript" src="js/jqplot/jqplot.canvasAxisLabelRenderer.min.js"></script>
