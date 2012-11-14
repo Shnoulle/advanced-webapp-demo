@@ -14,7 +14,7 @@ if (localStorage)
 include("js/about.js", function()
 {
     $("#aboutcontainer").append(aboutModalHTML);
-    $('#about').modal({
+    $('#aboutdialog').modal({
         keyboard: true,
         show: false
     });

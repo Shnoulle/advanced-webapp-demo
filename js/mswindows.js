@@ -57,7 +57,7 @@ catch (e) {}
 function AddJumpList() {
     window.external.msSiteModeCreateJumplist('Advanced WebApp Demo');
 
-    window.external.msSiteModeAddJumpListItem('About', function(){$('a[href=#about]').click();}, windowsicon, 'self');
+    //window.external.msSiteModeAddJumpListItem('About', function(){$('a[href=#about]').click();}, windowsicon, 'self');
 
     window.external.msSiteModeAddJumpListItem('Settings', "settings.html", windowsicon, 'self');
     window.external.msSiteModeAddJumpListItem('New Test', "test-setup.html", windowsicon, 'self');

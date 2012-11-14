@@ -1,6 +1,6 @@
 
 var aboutModalHTML =
-" <div id='about' class='modal hide fade in'>" +
+" <div id='aboutdialog' class='modal hide fade in'>" +
 "   <div class='modal-header'>" +
 "       <a class='close' data-dismiss='modal'><i class='icon-remove'></i></a>" +
 "       <h3>About</h3>" +
