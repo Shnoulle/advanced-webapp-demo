@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
 
         <!-- tell phones not to shrink mobile website -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0;" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
 
         <!-- Windows Integration -->
         <meta name="application-name" content="Advanced Web App Demo"/>
@@ -112,24 +112,17 @@
         <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
         <script type="text/javascript" src="js/jqplot/jqplot.canvasTextRenderer.min.js"></script>
         <script type="text/javascript" src="js/jqplot/jqplot.canvasAxisLabelRenderer.min.js"></script>
+        <script type="text/javascript" src="js/resultsdata.js"></script>
         <script language="javascript" type="text/javascript">
             var run = 1234123;
             var process = 5321;
             var notes = "This test is the important";
             var chart1 = null;
+            var log  = null;
 
             $(document).ready(function(){
-                chart1 = $.jqplot('chart1', [[3,7,9,10,40,60,38,24,15]], {
-                              series:[{showMarker:false}],
-                              axes:{
-                                xaxis:{
-                                  label:'Time (m)'
-                                },
-                                yaxis:{
-                                  label:'Moves'
-                                }
-                              }
-                          });
+                log = logNewResults("");
+                chart1 = openResults(log);
             });
 
             $(document).ready(function(){

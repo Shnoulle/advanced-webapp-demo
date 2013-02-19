@@ -10,6 +10,23 @@ if (localStorage)
     localStorage.setItem('temp_AnimateInOpposite', "false" );
 }
 
+var filesystemapisupport = false;
+window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+if (window.requestFileSystem)
+{
+    window.requestFileSystem(window.TEMPORARY, 5*1024*1024, function(fs){
+        console.log('Filesystem API support!');
+        filesystemapisupport = true;
+    }, function(){
+        console.log('No Filesystem API support');
+    });
+}
+else
+{
+        console.log('No Filesystem API support');
+}
+
+
 /* About Modal */
 include("js/about.js", function()
 {
