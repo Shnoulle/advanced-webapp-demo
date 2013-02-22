@@ -149,6 +149,7 @@
             function resizeChart()
             {
                 $("#chart1").width($("#chart1").parent().width() - 10);
+                $("#chart1").height(($(window).height()*.8) - 100);chart1.replot();
                 if (chart1) {
                     chart1.replot();
                 }
