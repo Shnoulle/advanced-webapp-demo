@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Advanced Web App - Review Results</title>
+        <meta charset="UTF-8">
+        <noscript><meta http-equiv="refresh" content="0;url=noscript.html" /></noscript>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon" />
+        <link rel="icon" type="image/png" href="img/icon.png">
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-toggle.css" />
+        <link rel="stylesheet" type="text/css" href="css/advanced-webapp-demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css" />
+
+        <!-- tell phones not to shrink mobile website -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+
+        <!-- Windows Integration -->
+        <meta name="application-name" content="Advanced Web App Demo"/>
+        <meta name="msapplication-TileImage" content="img/icon.png">
+        <meta name="msapplication-TileColor" content="#000000">
+        <!-- <meta name="msapplication-badge" content="frequency=1440; polling-uri=http://app.com/badge.xml"> -->
+
+        <!-- Remove fading flicker -->
+        <style> .main { display:none; } </style>
+        <noscript><style> .main { display:block; } </style> </noscript>
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script language="javascript" type="text/javascript" src="excanvas.min.js"></script>
+        <![endif]-->
+
+        <style> .controls > p { margin-top: 5px; } </style>
+    </head>
+    <body>
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="brand oppositeAnimation" href="index.html" class="transition">
+                        <img src="img/icon.png" />
+                        <span>Advanced Web App</span>
+                    </a>
+                    <div class="pull-right">
+                        <ul class="nav">
+                            <li class="hidden-phone"><a id="about" data-toggle="modal" href="#aboutdialog"><i class="icon-info-sign icon-white"></i> About</a></li>
+                            <li class="visible-phone"><a href="aboutmobile.html" class="oppositeAnimation"><i class="icon-info-sign icon-white"></i></a></li>
+                            <li><a href="settings.html" class="transition oppositeAnimation"><i class="icon-cog icon-white"></i> <span class="hidden-phone inline-form">Settings</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid main">
+            <div class="row-fluid">
+                <div class="span4">
+                    <div class="form-horizontal">
+                        <fieldset>
+                            <legend>Results</legend>
+
+                            <div class="control-group">
+                                    <select id="stored-results"></select>
+                            </div>
+                            <div class="control-group">
+                                    <input class="alert-info" type="file" id="files" name="files[]" multiple />
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="span8" style="text-align: center;">
+                    <div id="chart1" style="height:400px; width:100%; margin-top: 40px;"></div>
+                    <hr />
+                    <a href="#" class="btn btn-info" onclick="exportCurrentResults()">Export</a>
+                </div>
+            </div>
+
+            <div id="aboutcontainer"></div>
+            <div id="windowspincontainer"></div>
+        </div> <!-- /container -->
+
+        <!-- Le javascript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/include.min.js"></script>
+        <script type="text/javascript" src="js/blob/Blob.js"></script>
+        <script type="text/javascript" src="js/filesaver/FileSaver.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/advanced-webapp-demo.js"></script>
+        <script type="text/javascript" src="js/bootstrap-toggle.js"></script>
+        <script type="text/javascript" src="js/mswindows.js"></script>
+        <script type="text/javascript" src="js/unity.js"></script>
+        <script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="js/jqplot/jqplot.canvasTextRenderer.min.js"></script>
+        <script type="text/javascript" src="js/jqplot/jqplot.canvasAxisLabelRenderer.min.js"></script>
+        <script type="text/javascript" src="js/resultsdata.js"></script>
+        <script language="javascript" type="text/javascript">
+            var chart1 = null;
+            var results  = null;
+
+            $(document).ready(function()
+            {
+                $('#stored-results').change(selectStoredResult);
+                $('#files').change(handleFileSelect);
+                populateStoredResults();
+            });
+
+            function resizeChart()
+            {
+                $("#chart1").width($("#chart1").parent().width() - 10);
+                if (chart1) {
+                    chart1.replot();
+                }
+            }
+
+            function selectStoredResult()
+            {
+                var index = parseInt($("#stored-results option:selected").val());
+                readFile(resultFiles[index], function(){ 
+                    setTimeout(function(){
+                        results = null;
+                        results = CSVToArray(currentFileContents, ",");
+                        if (results == null) 
+                        {
+                            alert("Empty file");
+                        }
+                        else
+                        {
+                            chart1 = openResults(results); 
+                            resizeChart();
+                        }
+                    }, 400)
+                });
+            }
+
+            function populateStoredResults()
+            {
+                $("#stored-results").empty();
+                getResultsFiles(function(){
+                    for (var i = 0; i < resultFiles.length; i++)
+                    {
+                        $("#stored-results").append("<option value='" + i + "'>" + resultFiles[i].name + "</option>");
+                    }
+                    setTimeout(selectStoredResult,200);
+                });
+            }
+
+            function handleFileSelect(evt) 
+            {
+                var files = evt.target.files; // FileList object
+
+                // files is a FileList of File objects. List some properties.
+                readFile(files[0], function(){ 
+                    setTimeout(function(){
+                        results = null;
+                        results = CSVToArray(currentFileContents, ",");
+                        if (results == null) 
+                        {
+                            alert("Empty file");
+                        }
+                        else
+                        {
+                            chart1 = openResults(results); 
+                            resizeChart();
+                        }
+                    }, 400)
+                });
+            }
+
+            $(window).resize(resizeChart);
+        </script>
+    </body>
+</html>

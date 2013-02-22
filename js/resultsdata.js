@@ -140,16 +140,28 @@ function readFile(fileEntry, callback)
 {
     readFileCallback = callback;
     currentFile = fileEntry;
-    setupFileSystemAPI(function(){
-        currentFile.file(function(file) {
-            var reader = new FileReader();
-            reader.onloadend = function(e) {
-                currentFileContents = this.result;
-            };
-            reader.readAsText(file);
-            if (typeof(callback) != "undefined" && callback != null) readFileCallback();
-        }, errorHandler);
-    });
+    if (currentFile instanceof File)
+    {
+        var reader = new FileReader();
+        reader.onloadend = function(e) {
+            currentFileContents = this.result;
+        };
+        reader.readAsText(currentFile);
+        if (typeof(callback) != "undefined" && callback != null) readFileCallback();
+    }
+    else
+    {
+        setupFileSystemAPI(function(){
+            currentFile.file(function(file) {
+                var reader = new FileReader();
+                reader.onloadend = function(e) {
+                    currentFileContents = this.result;
+                };
+                reader.readAsText(file);
+                if (typeof(callback) != "undefined" && callback != null) readFileCallback();
+            }, errorHandler);
+        });
+    }
 }
 
 function errorHandler(err)
