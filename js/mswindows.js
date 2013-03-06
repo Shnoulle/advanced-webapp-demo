@@ -1,4 +1,10 @@
-/* Windows 7/8 integration */
+/*
+ * Windows 7 Integration
+ * -----------------------
+ * 
+ * This file is subject to the terms and conditions defined in
+ * https://github.com/lunarcloud/advanced-webapp-demo/blob/master/LICENSE.md
+ */
 var windowsicon = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + "/img/icon.ico";
 
 

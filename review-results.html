@@ -1,3 +1,7 @@
+<!--
+    This file is subject to the terms and conditions defined in
+    https://github.com/lunarcloud/advanced-webapp-demo/blob/master/LICENSE.md
+-->
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,7 +70,8 @@
                                     <select id="stored-results"></select>
                             </div>
                             <div class="control-group">
-                                    <input class="alert-info" type="file" id="files" name="files[]" multiple />
+                                    <button id="files-proxy" class="btn btn-info" >Upload CSV</button>
+                                    <input class="alert-info" type="file" id="files" name="files[]" multiple accept=".csv" style="display: none;" />
                             </div>
                         </fieldset>
                     </div>
@@ -105,6 +110,12 @@
             $(document).ready(function()
             {
                 $('#stored-results').change(selectStoredResult);
+                
+                $("#files-proxy").click(function(){
+                    $("#files").click();
+                });
+                //drag and drop
+
                 $('#files').change(handleFileSelect);
                 populateStoredResults();
             });
@@ -153,9 +164,30 @@
             function handleFileSelect(evt) 
             {
                 var files = evt.target.files; // FileList object
+                if (files.length == 0 ) return;
+
+                //check file extension
+                var fileindex = 0;
+                var csvfound = false;
+
+                for (;fileindex < files.length; fileindex++)
+                {
+                    if (files[0].name.substring(files[0].name.lastIndexOf('.')).toLowerCase()
+                        == ".csv" ) 
+                    {
+                        csvfound = true;
+                        break;
+                    }
+                }
+
+                if (!csvfound)
+                {
+                    alert("Only select CSV files.");
+                    return;
+                }
 
                 // files is a FileList of File objects. List some properties.
-                readFile(files[0], function(){ 
+                readFile(files[fileindex], function(){ 
                     setTimeout(function(){
                         results = null;
                         results = CSVToArray(currentFileContents, ",");
@@ -169,6 +201,7 @@
                             resizeChart();
                         }
                     }, 400)
+
                 });
             }
 

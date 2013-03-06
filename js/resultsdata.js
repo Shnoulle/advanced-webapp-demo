@@ -1,4 +1,11 @@
-/* Test Results specific functions */
+/*
+ * Results Data 
+ * Test Results specific functions
+ * -----------------------
+ * 
+ * This file is subject to the terms and conditions defined in
+ * https://github.com/lunarcloud/advanced-webapp-demo/blob/master/LICENSE.md
+ */
 
 function createRandomResults()
 {

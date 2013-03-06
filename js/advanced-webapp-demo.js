@@ -1,4 +1,15 @@
-var is_touch_device = !!('ontouchstart' in window);
+/*
+ * Advanced Webapp Main Javascript
+ * -----------------------
+ * 
+ * This file is subject to the terms and conditions defined in
+ * https://github.com/lunarcloud/advanced-webapp-demo/blob/master/LICENSE.md
+ */
+
+var supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+var isiOS = ( navigator.userAgent.match(/(iPad|iPhone|iPod)/i) ? true : false );
+var isAndroid = ( navigator.userAgent.match(/(android|Android)/i) ? true : false );
+var dragndrop_support = 'draggable' in document.createElement('span');
 
 /* Check Local Storage for the animation style */
 var animationStyle = "slideLeft";

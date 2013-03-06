@@ -1,3 +1,11 @@
+/*
+ * About Modal
+ * in a javascript string to avoid reliance on server-side technology in this demo
+ * -----------------------
+ * 
+ * This file is subject to the terms and conditions defined in
+ * https://github.com/lunarcloud/advanced-webapp-demo/blob/master/LICENSE.md
+ */
 
 var aboutModalHTML =
 " <div id='aboutdialog' class='modal hide fade in'>" +
