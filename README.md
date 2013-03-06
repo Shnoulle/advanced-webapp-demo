@@ -13,7 +13,7 @@ Local Logging        |  ☑  |
 Import/Export     	 |  ☑  | 
 Graphing             |  ☑  |	Sure can! (Use a nice library)
 Touch Screen         |  ☑  |	Constant effort of testing and consideration
-Internationalization |  ☒  | JSON all your strings, provide configuration options in text file / settings screen
+Internationalization |  ☐  | JSON all your strings, provide configuration options in text file / settings screen
 Kiosk Mode	         |  ☒  |	Chrome launch option “--kiosk” Also, extensions like this and this developer tools and other stuff can be dealt with via policies
 
 ☒ = No / Wont / Browser’s responsibility 
